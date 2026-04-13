@@ -1,75 +1,79 @@
 package sel.sel;
 
 import java.time.Duration;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.locators.RelativeLocator;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class FirstTest {
-	public static void main(String[] args) {
+	 WebDriver driver;
 
-        //  Open Chrome browser
-        WebDriver driver = new ChromeDriver();
+	    @BeforeMethod
+	    public void setup() {
+	        driver = new ChromeDriver();
+	        driver.manage().window();
+	        driver.get("https://the-internet.herokuapp.com/login");
+	    }
 
-        // Open login page
-       driver.get("https://the-internet.herokuapp.com/login");
+	    //1.Verify Page Title
+	    
+	    @Test(priority = 0)
+	    public void verifyPageTitle() {
+	        String title = driver.getTitle();
+	        Assert.assertTrue(title.contains("The Internet"));
+	    }
+	    
+	    // 2.Successful Login
+	    
+	    @Test(priority = 1)
+	    public void successfulLogin() {
 
-        // Locate username field using ID locator
-        WebElement username = driver.findElement(By.id("username"));
+	        driver.findElement(By.id("username")).sendKeys("tomsmith");
+	        driver.findElement(By.id("password")).sendKeys("SuperSecretPassword!");
+	        driver.findElement(By.cssSelector("button.radius")).click();
 
-        // Locate password field using ID locator
-        WebElement password = driver.findElement(By.id("password"));
+	        WebElement successMsg = driver.findElement(By.id("flash"));
 
-        // Locate login button using CSS selector
-        WebElement loginButton = driver.findElement(By.cssSelector("button.radius"));
+	        Assert.assertTrue(successMsg.getText().contains("You logged into a secure area!"));
+	    }
+	 // 3. Failed Login (Wrong Password)
+	    
+	    @Test(priority = 2)
+	    public void wrongPasswordLogin() {
 
-        //  Enter correct username
-        username.sendKeys("tomsmith");
+	        driver.findElement(By.id("username")).sendKeys("tomsmith");
+	        driver.findElement(By.id("password")).sendKeys("wrongPassword");
+	        driver.findElement(By.cssSelector("button.radius")).click();
 
-        //  Enter correct password
-        password.sendKeys("SuperSecretPassword!");
+	        WebElement errorMsg = driver.findElement(By.id("flash"));
 
-        //  Click login button
-        loginButton.click();
+	        Assert.assertTrue(errorMsg.getText().contains("Your password is invalid!"));
 
-        //  Locate success message using XPath
-        WebElement successMessage = driver.findElement(By.xpath("//*[@id='flash']"));
+	        // Ensure dashboard is not visible
+	        Assert.assertFalse(driver.getCurrentUrl().contains("/secure"));
+	    }
 
-        //  Print success message in console
-        System.out.println("Success message: " + successMessage.getText());
-        
+	    // 4. Failed Login (Empty Fields)
+	    
+	    @Test(priority = 3)
+	    public void emptyFieldsLogin() {
 
-////////part 2 using wrong data
+	        driver.findElement(By.id("username")).sendKeys("");
+	        driver.findElement(By.id("password")).sendKeys("");
+	        driver.findElement(By.cssSelector("button.radius")).click();
 
-        //  Open login page again
-        driver.get("https://the-internet.herokuapp.com/login");
+	        WebElement errorMsg = driver.findElement(By.id("flash"));
 
-        //  Locate elements again
-        WebElement username2 = driver.findElement(By.id("username"));
-        
-        WebElement password2 = driver.findElement(By.id("password"));
-        
-        WebElement loginButton2 = driver.findElement(By.cssSelector("button.radius"));
+	        Assert.assertTrue(errorMsg.getText().contains("Your username is invalid!"));
+	    }
 
-        //  Enter wrong username
-        username2.sendKeys("wronguser");
-
-        // Enter wrong password
-        password2.sendKeys("wrongpassword");
-
-        //  Click login
-        loginButton2.click();
-
-        // Locate error message
-        WebElement errorMessage = driver.findElement(By.id("flash"));
-
-        //  Print error message
-        System.out.println("Error message: " + errorMessage.getText());
-
-        //  Close browser
-       // driver.quit();
-    }
+	    @AfterMethod
+	    public void closeBrowser() {
+	        driver.quit();
+	    }
 }
