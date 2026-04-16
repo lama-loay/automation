@@ -1,61 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="4" passed="4" failed="0" skipped="0">
+<testng-results ignored="0" total="0" passed="0" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-04-13T16:03:37 EEST" name="Default suite" finished-at="2026-04-13T16:04:25 EEST" duration-ms="47471">
+  <suite started-at="2026-04-14T10:37:59 EEST" name="Default suite" finished-at="2026-04-14T10:37:59 EEST" duration-ms="8">
     <groups>
     </groups>
-    <test started-at="2026-04-13T16:03:37 EEST" name="Default test" finished-at="2026-04-13T16:04:25 EEST" duration-ms="47471">
-      <class name="sel.sel.FirstTest">
-        <test-method is-config="true" signature="setup()[pri:0, instance:sel.sel.FirstTest@7c6908d7]" started-at="2026-04-13T16:03:37 EEST" name="setup" finished-at="2026-04-13T16:03:50 EEST" duration-ms="13240" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setup -->
-        <test-method signature="verifyTitle()[pri:0, instance:sel.sel.FirstTest@7c6908d7]" started-at="2026-04-13T16:03:50 EEST" name="verifyTitle" finished-at="2026-04-13T16:03:50 EEST" duration-ms="40" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- verifyTitle -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:sel.sel.FirstTest@7c6908d7]" started-at="2026-04-13T16:03:50 EEST" name="tearDown" finished-at="2026-04-13T16:03:51 EEST" duration-ms="261" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setup()[pri:0, instance:sel.sel.FirstTest@7c6908d7]" started-at="2026-04-13T16:03:51 EEST" name="setup" finished-at="2026-04-13T16:04:01 EEST" duration-ms="10008" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setup -->
-        <test-method signature="successfulLogin()[pri:1, instance:sel.sel.FirstTest@7c6908d7]" started-at="2026-04-13T16:04:01 EEST" name="successfulLogin" finished-at="2026-04-13T16:04:02 EEST" duration-ms="999" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- successfulLogin -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:sel.sel.FirstTest@7c6908d7]" started-at="2026-04-13T16:04:02 EEST" name="tearDown" finished-at="2026-04-13T16:04:02 EEST" duration-ms="229" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setup()[pri:0, instance:sel.sel.FirstTest@7c6908d7]" started-at="2026-04-13T16:04:02 EEST" name="setup" finished-at="2026-04-13T16:04:12 EEST" duration-ms="10401" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setup -->
-        <test-method signature="wrongPasswordLogin()[pri:2, instance:sel.sel.FirstTest@7c6908d7]" started-at="2026-04-13T16:04:12 EEST" name="wrongPasswordLogin" finished-at="2026-04-13T16:04:14 EEST" duration-ms="1289" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- wrongPasswordLogin -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:sel.sel.FirstTest@7c6908d7]" started-at="2026-04-13T16:04:14 EEST" name="tearDown" finished-at="2026-04-13T16:04:14 EEST" duration-ms="202" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setup()[pri:0, instance:sel.sel.FirstTest@7c6908d7]" started-at="2026-04-13T16:04:14 EEST" name="setup" finished-at="2026-04-13T16:04:23 EEST" duration-ms="9494" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setup -->
-        <test-method signature="emptyFieldsLogin()[pri:3, instance:sel.sel.FirstTest@7c6908d7]" started-at="2026-04-13T16:04:23 EEST" name="emptyFieldsLogin" finished-at="2026-04-13T16:04:24 EEST" duration-ms="1021" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- emptyFieldsLogin -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:sel.sel.FirstTest@7c6908d7]" started-at="2026-04-13T16:04:24 EEST" name="tearDown" finished-at="2026-04-13T16:04:25 EEST" duration-ms="205" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-      </class> <!-- sel.sel.FirstTest -->
+    <test started-at="2026-04-14T10:37:59 EEST" name="Default test" finished-at="2026-04-14T10:37:59 EEST" duration-ms="8">
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

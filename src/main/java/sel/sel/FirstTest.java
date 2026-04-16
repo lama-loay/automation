@@ -1,79 +1,73 @@
 package sel.sel;
 
 import java.time.Duration;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class FirstTest {
-	 WebDriver driver;
 
-	    @BeforeMethod
-	    public void setup() {
-	        driver = new ChromeDriver();
-	        driver.manage().window();
-	        driver.get("https://the-internet.herokuapp.com/login");
-	    }
+    public static void main(String[] args) {
 
-	    //1.Verify Page Title
-	    
-	    @Test(priority = 0)
-	    public void verifyPageTitle() {
-	        String title = driver.getTitle();
-	        Assert.assertTrue(title.contains("The Internet"));
-	    }
-	    
-	    // 2.Successful Login
-	    
-	    @Test(priority = 1)
-	    public void successfulLogin() {
+        WebDriver driver = new ChromeDriver();
 
-	        driver.findElement(By.id("username")).sendKeys("tomsmith");
-	        driver.findElement(By.id("password")).sendKeys("SuperSecretPassword!");
-	        driver.findElement(By.cssSelector("button.radius")).click();
+        try {
+            
+            driver.get("https://www.google.com");
 
-	        WebElement successMsg = driver.findElement(By.id("flash"));
+            WebElement searchbox = driver.findElement(By.name("q"));
+            searchbox.sendKeys("Selenium Automation");
+            searchbox.submit();
 
-	        Assert.assertTrue(successMsg.getText().contains("You logged into a secure area!"));
-	    }
-	 // 3. Failed Login (Wrong Password)
-	    
-	    @Test(priority = 2)
-	    public void wrongPasswordLogin() {
+            
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div#search h3")));
 
-	        driver.findElement(By.id("username")).sendKeys("tomsmith");
-	        driver.findElement(By.id("password")).sendKeys("wrongPassword");
-	        driver.findElement(By.cssSelector("button.radius")).click();
+            
+            List<WebElement> results = driver.findElements(By.cssSelector("div#search h3"));
 
-	        WebElement errorMsg = driver.findElement(By.id("flash"));
+            System.out.println("Top 5 Results in search about selenium:\n");
 
-	        Assert.assertTrue(errorMsg.getText().contains("Your password is invalid!"));
+            int count = 0;
 
-	        // Ensure dashboard is not visible
-	        Assert.assertFalse(driver.getCurrentUrl().contains("/secure"));
-	    }
+            for (WebElement result : results) {
 
-	    // 4. Failed Login (Empty Fields)
-	    
-	    @Test(priority = 3)
-	    public void emptyFieldsLogin() {
+                if (count == 5) break; 
 
-	        driver.findElement(By.id("username")).sendKeys("");
-	        driver.findElement(By.id("password")).sendKeys("");
-	        driver.findElement(By.cssSelector("button.radius")).click();
+                try {
+                    String title = result.getText();
 
-	        WebElement errorMsg = driver.findElement(By.id("flash"));
+                    String url = result.findElement(By.xpath("./ancestor::a"))
+                                       .getAttribute("href");
 
-	        Assert.assertTrue(errorMsg.getText().contains("Your username is invalid!"));
-	    }
+                    System.out.println("Result " + (count + 1));
+                    System.out.println("Title: " + title);
+                    System.out.println("URL: " + url);
 
-	    @AfterMethod
-	    public void closeBrowser() {
-	        driver.quit();
-	    }
+                    
+                    if (!title.toLowerCase().contains("selenium")) {
+                        System.out.println("Warning: Title does not contain Selenium");
+                    }
+
+                    System.out.println("-------------------------------------");
+
+                    count++;
+
+                } catch (Exception e) {
+                   
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            
+            driver.quit();
+        }
+    }
 }
